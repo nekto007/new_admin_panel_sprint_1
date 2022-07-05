@@ -54,11 +54,8 @@ CREATE TABLE IF NOT EXISTS content.person_film_work
 -- #Создаем индекс для таблицы content.film_work с полями (creation_date, rating)
 CREATE INDEX film_work_creation_date_idx ON content.film_work (creation_date, rating);
 
--- #Создаем индекс для таблицы content.person с полями (id)
-CREATE UNIQUE INDEX genre_person_idx ON content.person (id);
-
--- #Создаем уникальный индекс для таблицы content.person_film_work с полями (film_work_id, person_id)
-CREATE UNIQUE INDEX film_work_person_fk_idx ON content.person_film_work (film_work_id, person_id);
+-- #Создаем уникальный индекс для таблицы content.person_film_work с полями (film_work_id, person_id, role)
+CREATE UNIQUE INDEX film_work_person_role_idx ON content.person_film_work (film_work_id, person_id, role);
 
 -- #Создаем индекс для таблицы content.genre_film_work с полями (genre_id, film_work_id)
 CREATE UNIQUE INDEX genre_film_work_idx ON content.genre_film_work (genre_id, film_work_id);
