@@ -4,3 +4,4 @@ psycopg2-binary==2.9.3
 python-dotenv==0.20.0
 django-split-settings==1.1.0
 django-debug-toolbar==3.2.4
+pytest~=6.2.5
