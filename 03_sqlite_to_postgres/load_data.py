@@ -15,6 +15,7 @@ from models_dataclass import (
     PersonFilmwork,
 )
 from postgres_saver import PostgresSaver
+from settings import dsl
 from sqlite_loader import SQLiteLoader
 
 
@@ -40,13 +41,6 @@ def load_from_sqlite(connection: sqlite3.Connection, pg_conn: _connection, logge
 if __name__ == '__main__':
     load_dotenv()
     logger = getLogger()
-    dsl = {
-        'dbname': os.environ.get('DB_NAME'),
-        'user': os.environ.get('DB_USER'),
-        'password': os.environ.get('DB_PASSWORD'),
-        'host': os.environ.get('DB_HOST', '127.0.0.1'),
-        'port': os.environ.get('DB_PORT', 5432)
-    }
     sqlite_path = os.environ.get('SQLITE_PATH')
     with sqlite3.connect(sqlite_path) as sqlite_conn, \
             psycopg2.connect(**dsl, cursor_factory=DictCursor) as pg_conn:
