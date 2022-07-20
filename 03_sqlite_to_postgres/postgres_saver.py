@@ -1,4 +1,7 @@
-from dataclasses import astuple, fields
+from dataclasses import (
+    astuple,
+    fields,
+)
 from logging import getLogger
 
 import psycopg2
@@ -14,13 +17,11 @@ class PostgresSaver:
     def save_all_data(self, talbe_name, data, dataclass):
         """Метод сохранения данных в таблицу PostgreSQL"""
         try:
-            print('fff')
             keys = ", ".join(field.name for field in fields(dataclass))
             execute_values(
                 self._cursor,
                 f"""INSERT INTO content.{talbe_name} ({keys})
                 VALUES %s ON CONFLICT (id) DO NOTHING;""",
                 [astuple(row) for row in data])
-            print('qqqq')
         except Exception as exception:
             self._logger.error(exception)
