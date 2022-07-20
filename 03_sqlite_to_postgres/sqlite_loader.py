@@ -38,11 +38,9 @@ class SQLiteLoader:
                 _curs.execute(f"SELECT * FROM {table};")  # noqa: S608
             except sqlite3.Error as e:
                 raise e
-            while True:
-                rows = _curs.fetchmany(size=self.batch_size)
-                if not rows:
-                    return
-                yield from rows
+            while rows := _curs.fetchmany(size=self.batch_size):
+                if rows:
+                    yield from rows
         except Exception as exception:
             self._logger.error(exception)
 
