@@ -12,7 +12,6 @@ def reformat_fields(element):
         del (element["updated_at"])
     if "file_path" in element:
         del (element["file_path"])
-    print(element)
     return element
 
 
